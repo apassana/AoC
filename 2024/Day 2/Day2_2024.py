@@ -11,21 +11,72 @@ class Solution:
             result.append(list(map(int, i.split())))
         return result
 
-    def test_line(self, l: list[int]):
-        r = range(l[0] + 1, l[0] + 4)
-        for i in range(1, len(l)):
-            if i not in r:
-                return False
-            r.start = i + 1
-            r.stop = i + 4
-        self.num += 1
+    def test_line(self, l: list[int]) -> bool:
+        if l[0] < l[1]:
+            low = l[0] + 1
+            high = l[0] + 3
+            for i in range(1, len(l)):
+                if l[i] >= low and l[i] <= high:
+                    low = l[i] + 1
+                    high = l[i] + 3
+                else:
+                    return False
+        else:
+            low = l[0] - 3
+            high = l[0] - 1
+            for i in range(1, len(l)):
+                if l[i] >= low and l[i] <= high:
+                    low = l[i] - 3
+                    high = l[i] - 1
+                else:
+                    return False
+        return True
+
+    def test_line2(self, l: list[int]) -> bool:
+        tolerance = True
+        if 
+        if l[0] < l[1]:
+            low = l[0] + 1
+            high = l[0] + 3
+            for i in range(1, len(l)):
+                if l[i] >= low and l[i] <= high:
+                    low = l[i] + 1
+                    high = l[i] + 3
+                else:
+                    if tolerance:
+                        tolerance = False
+                    else:
+                        return False
+        else:
+            low = l[0] - 3
+            high = l[0] - 1
+            for i in range(1, len(l)):
+                if l[i] >= low and l[i] <= high:
+                    low = l[i] - 3
+                    high = l[i] - 1
+                else:
+                    if tolerance:
+                        tolerance = False
+                    else:
+                        return False
+        return True
+
+
+
+    def test_lines(self, f, l: list[list[int]]) -> int:
+        result = 0
+        for i in l:
+            if f(i):
+                result += 1
+        return result
 
     def solve(self):
-        self.num = 0
         l = self.make_list()
         ll = self.listify(l)
-        map(self.test_line, ll)
-        print(self.num)
+        num1 = self.test_lines(self.test_line, ll)
+        num2 = self.test_lines(self.test_line2, ll)
+        print("First solution: ", num1)
+        print("Second solution: ", num2)
 
 
 def main():
