@@ -34,34 +34,11 @@ class Solution:
 
     def test_line2(self, l: list[int]) -> bool:
         tolerance = True
-        if 
-        if l[0] < l[1]:
-            low = l[0] + 1
-            high = l[0] + 3
-            for i in range(1, len(l)):
-                if l[i] >= low and l[i] <= high:
-                    low = l[i] + 1
-                    high = l[i] + 3
-                else:
-                    if tolerance:
-                        tolerance = False
-                    else:
-                        return False
-        else:
-            low = l[0] - 3
-            high = l[0] - 1
-            for i in range(1, len(l)):
-                if l[i] >= low and l[i] <= high:
-                    low = l[i] - 3
-                    high = l[i] - 1
-                else:
-                    if tolerance:
-                        tolerance = False
-                    else:
-                        return False
-        return True
-
-
+        l_len = len(l)
+        for i in range(l_len):
+            if self.test_line(l[0:i] + l[(i + 1):l_len]):
+                return True
+        return False
 
     def test_lines(self, f, l: list[list[int]]) -> int:
         result = 0
